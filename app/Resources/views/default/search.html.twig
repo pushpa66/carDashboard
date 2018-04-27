@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<!-- Mirrored from themes.webmasterdriver.net/carforyou/demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 08 Apr 2018 05:28:32 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>CarForYou - Responsive Car Dealer HTML5 Template</title>
+    <!--Bootstrap -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
+    <!--Custome Style -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
+    <!--OWL Carousel slider-->
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.transitions.css') }}" type="text/css">
+    <!--slick-slider -->
+    <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet">
+    <!--bootstrap-slider -->
+    <link href="{{ asset('assets/css/bootstrap-slider.min.css') }}" rel="stylesheet">
+    <!--FontAwesome Font Style -->
+    <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet">
+
+    <!-- SWITCHER -->
+    <link rel="stylesheet" id="switcher-css" type="text/css" href="{{ asset('assets/switcher/css/switcher.css') }}" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/red.css') }}" title="red" media="all" data-default-color="true" />
+    <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/orange.css') }}" title="orange" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/blue.css') }}" title="blue" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/pink.css') }}" title="pink" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/green.css') }}" title="green" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/purple.css') }}" title="purple" media="all" />
+
+    <!-- Google-Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<!-- Filter-Form -->
+<section id="filter_form" class="gray-bg">
+    <div class="container">
+        <h3>Find Your Dream Car <span>(Easy search from here)</span></h3>
+            <form method="get">
+                <div class="row">
+                <div class="form-group col-md-3 col-sm-6 black_input">
+                    <label for="brand">Fuel MPG</label>
+                    <input type="number" class="form-control" id="fuel" name="fuel" value="{{ fuel }}" min="1" max="64">
+                </div>
+                <div class="form-group col-md-3 col-sm-6 black_input">
+                    <label for="model">No of wheels</label>
+                    <input type="number" class="form-control" id="wheels" name="wheels" value="{{ wheels }}" min="1" max="64">
+                </div>
+                <div class="form-group col-md-3 col-sm-6 black_input">
+                    <label for="model">No of doors</label>
+                    <input type="number" class="form-control" id="doors" name="doors" value="{{ doors }}" min="1" max="64">
+                </div>
+
+                <div class="form-group col-md-6 col-sm-6 black_input">
+                    <label for="price_range" class="form-label">Price Range ($)</label>
+                    {% if price | length == 2 %}
+                        <input name="price" id="price_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[{{ price[0] }},{{ price[1] }}]"/>
+                    {% else %}
+                        <input name="price" id="price_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[1000,5000]"/>
+                    {% endif %}
+                </div>
+                <div class="form-group col-md-6 col-sm-6 black_input">
+                    <label for="speed_range" class="form-label">Speed Range Km/H</label>
+                    {% if speed | length == 2 %}
+                        <input name="speed" id="speed_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[{{ speed[0] }},{{ speed[1] }}]"/>
+                    {% else %}
+                        <input name="speed" id="speed_range" type="text" class="span2" value="" data-slider-min="0" data-slider-max="6000" data-slider-step="5" data-slider-value="[1000,5000]"/>
+                    {% endif %}
+                </div>
+
+                </div>
+                <div class="row">
+                <div class="form-group col-md-3 col-sm-6 pull-right">
+                    <button type="submit" class="btn btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search Car </button>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="listing-page">
+    <div class="container">
+        <div class="row">
+            {% for car in cars %}
+                <div class="col-md-6">
+                    <div class="product-listing-m gray-bg">
+                        <div class="product-listing-content">
+                            <h5><a href="#">{{ car.brand }} {{ car.model }}</a></h5>
+                            <p class="list-price">${{ car.price |number_format(2, '.', ',') }}</p>
+                            <ul>
+                                <li><i class="fa fa-road" aria-hidden="true"></i>{{ car.fuel }} MPG</li>
+                                <li><i class="fa fa-tachometer" aria-hidden="true"></i>{{ car.topSpeed }} Km/H</li>
+                                <li><i class="fa fa-user" aria-hidden="true"></i>{{ car.doors }} doors</li>
+                                {#<li><i class="fa fa-calendar" aria-hidden="true"></i>2005 model</li>#}
+                                <li><i class="fa fa-car" aria-hidden="true"></i>{{ car.engine }} cc</li>
+                                <li><i class="fa fa-superpowers" aria-hidden="true"></i>{{ car.torque}} Nm</li>
+                            </ul>
+                            {#<a href="#" class="btn">View Details <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>#}
+                            {#<div class="car-location"><span><i class="fa fa-map-marker" aria-hidden="true"></i> Colorado, USA</span></div>#}
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endfor %}
+
+
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Scripts -->
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/interface.js') }}"></script>
+<!--Switcher-->
+<script src="{{ asset('assets/switcher/js/switcher.js') }}"></script>
+<!--bootstrap-slider-JS-->
+<script src="{{ asset('assets/js/bootstrap-slider.min.js') }}"></script>
+<!--Slider-JS-->
+<script src="{{ asset('assets/js/slick.min.js') }}"></script>
+<script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+
+</body>
+
+<!-- Mirrored from themes.webmasterdriver.net/carforyou/demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 08 Apr 2018 05:29:47 GMT -->
+</html>

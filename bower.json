@@ -1,0 +1,21 @@
+{
+  "name": "productDashboard",
+  "authors": [
+    "shanpramuditha <pramuditha.14@cse.mrt.ac.lk>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "directory": "web/assets/vendor/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gentelella": "^1.4.0"
+  }
+}

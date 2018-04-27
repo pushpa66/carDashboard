@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Add User <small></small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br />
+                    {{ form_start(form,{'attr':{'class':'form-horizontal form-label-left'}}) }}
+                    <div class="form-group">
+                        {{ form_label(form.username,null,{'label_attr':{'class':'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(form.username,{'attr':{'class':'form-control col-md-7 col-xs-12'}}) }}
+                            {{ form_errors(form.username) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.password.first,null,{'label_attr':{'class':'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(form.password.first,{'attr':{'class':'form-control col-md-7 col-xs-12'}}) }}
+                            {{ form_errors(form.password.first) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.password.second,null,{'label_attr':{'class':'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(form.password.second,{'attr':{'class':'form-control col-md-7 col-xs-12'}}) }}
+                            {{ form_errors(form.password.second) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form.save,{'attr':{'class':'btn btn-success' }}) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
